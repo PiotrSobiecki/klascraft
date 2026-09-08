@@ -10,6 +10,13 @@
   background: #18271e;
   color: #e8edd8;
 }
+/* Scrollbars follow the palette: track in the page colour, square thumb in the border colour. */
+:root { scrollbar-color: #4b6246 #18271e; }
+::-webkit-scrollbar { width: 14px; height: 14px; }
+::-webkit-scrollbar-track { background: #18271e; }
+::-webkit-scrollbar-thumb { background: #4b6246; border: 3px solid #18271e; }
+::-webkit-scrollbar-thumb:hover { background: #647a49; }
+::-webkit-scrollbar-corner { background: #18271e; }
 body {
   background-image: linear-gradient(#92b47704 1px, transparent 1px), linear-gradient(90deg, #92b47704 1px, transparent 1px);
   background-size: 32px 32px;

@@ -37,6 +37,10 @@
   --cream: #f3f1df;
   color: #2d432d;
   background: #f3f1df;
+  scrollbar-color: #bbc5a2 #f3f1df;
+  ::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: #f3f1df; }
+  ::-webkit-scrollbar-thumb { background: #bbc5a2; border-color: #f3f1df; }
+  ::-webkit-scrollbar-thumb:hover { background: #a8bb85; }
 
   body { background-image: linear-gradient(#65834308 1px, transparent 1px), linear-gradient(90deg, #65834308 1px, transparent 1px); }
   ::selection { background: #b6cf8a; color: #1e321d; }

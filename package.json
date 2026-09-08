@@ -1,0 +1,6 @@
+{
+  "name": "klascraft", "private": true, "version": "0.1.0", "type": "module",
+  "workspaces": ["apps/*"],
+  "scripts": { "dev": "npm run dev -w @klascraft/user-application", "build": "npm run typecheck && npm run build -w @klascraft/user-application", "typecheck": "tsc --noEmit", "preview": "npm run preview -w @klascraft/user-application", "types": "npm run types -w @klascraft/data-service", "deploy": "npm run build && npm run deploy -w @klascraft/user-application" },
+  "devDependencies": { "typescript": "latest", "@types/node": "latest" }
+}

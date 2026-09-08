@@ -1,0 +1,6 @@
+{
+  "name": "@klascraft/data-service", "private": true, "version": "0.1.0", "type": "module",
+  "scripts": { "types": "wrangler types" },
+  "dependencies": { "hono": "latest" },
+  "devDependencies": { "wrangler": "latest" }
+}

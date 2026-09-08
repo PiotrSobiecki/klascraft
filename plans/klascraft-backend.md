@@ -323,7 +323,7 @@ Rodzic w profilu wybiera klasę i dziecko z listy albo dodaje nowe; drugi rodzic
 
 ### Co budujemy
 
-Korekta i anulowanie wpłaty tworzą nowe wpisy dziennika z aktorem i czasem; poprzednie pozostają. Po terminie niezapłacona część jest oznaczona jako zaległa, wpłaty nadal można rejestrować. Rodzice przypisani do dziecka dostają e-mail 3 dni przed i 3 dni po terminie, tylko przy niezerowym saldzie, z osobnym wyłączeniem w profilu. Zarządzający zamyka zbiórkę (do potwierdzenia z użytkownikiem przed startem etapu).
+Korekta i anulowanie wpłaty tworzą nowe wpisy dziennika z aktorem i czasem; poprzednie pozostają. Po terminie niezapłacona część jest oznaczona jako zaległa, wpłaty nadal można rejestrować. Rodzice przypisani do dziecka dostają e-mail 3 dni przed i 3 dni po terminie, tylko przy niezerowym saldzie, z osobnym wyłączeniem w profilu. Zarządzający zamyka zbiórkę.
 
 ### Założenia wejściowe
 
@@ -349,11 +349,11 @@ Korekta i anulowanie wpłaty tworzą nowe wpisy dziennika z aktorem i czasem; po
 
 ### Co budujemy
 
-Zadanie cykliczne co 2–3 dni pobiera aktualności dla szkół z co najmniej jedną zatwierdzoną klasą przez adaptery RSS i HTML, zapisuje tytuł, datę, fragment i link, deduplikuje. Dla szkoły bez działającego adaptera pokazywany jest link do strony aktualności. Operator przypisuje adres źródła albo oznacza je jako nieobsługiwane (do potwierdzenia przed startem). Widok szkoły z etapu 1 pokazuje aktualności.
+Zadanie cykliczne co 2–3 dni pobiera aktualności dla szkół z co najmniej jedną zatwierdzoną klasą przez adaptery RSS i HTML, zapisuje tytuł, datę, fragment i link, deduplikuje. Dla szkoły bez działającego adaptera pokazywany jest link do strony aktualności. Adres strony szkoły pochodzi z importu listy szkół; źródło (RSS albo strona aktualności) jest wykrywane automatycznie, bez panelu operatora. Widok szkoły z etapu 1 pokazuje aktualności.
 
 ### Założenia wejściowe
 
-- Katalog szkół z etapu 1, panel operatora z etapu 2, zadania cykliczne z etapu 10.
+- Katalog szkół z adresami stron z etapu 1, zadania cykliczne z etapu 10.
 - Zasady korzystania z materiałów szkół sprawdzone przed uruchomieniem produkcyjnym.
 
 ### Poza zakresem etapu
@@ -364,7 +364,7 @@ Zadanie cykliczne co 2–3 dni pobiera aktualności dla szkół z co najmniej je
 
 - [ ] Adapter RSS i adapter HTML poprawnie parsują zapisane próbki dwóch szkół — [test: próbki]
 - [ ] Drugie uruchomienie zadania nie tworzy duplikatów — [test: idempotencja]
-- [ ] Szkoła bez działającego źródła zwraca sam link i widok klasy działa — [test: fallback]
+- [ ] Wykrywanie źródła znajduje RSS albo stronę aktualności na zapisanych próbkach; szkoła bez wykrytego źródła zwraca link do strony szkoły i widok klasy działa — [test: wykrywanie i fallback]
 - [ ] Szkoła bez zatwierdzonej klasy nie jest pobierana — [test: zakres pobierania]
 - [ ] Gość widzi aktualności w widoku szkoły — [test przeglądarkowy]
 

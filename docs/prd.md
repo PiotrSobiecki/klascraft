@@ -2,7 +2,7 @@
 
 Data: 2026-09-08. Źródła: `docs/backend-discovery.md` (Q1–Q150) oraz wywiad blueprint Q151–Q176 (składki, kalendarz, dokumenty). Dokument opisuje docelowy zakres, nie istniejącą implementację. Obecny frontend jest demonstracją z fikcyjnymi danymi.
 
-Ustalenia oznaczone „(założenie)" nie były przedmiotem decyzji użytkownika i wymagają potwierdzenia przed implementacją danego etapu. Dotyczy to zamykania zbiórki i przypisywania stron aktualności przez operatora.
+Wszystkie ustalenia zostały potwierdzone przez użytkownika (ostatnie: Q177 zamykanie zbiórki, Q178 źródło adresów aktualności).
 
 ## Problem
 
@@ -131,14 +131,14 @@ Aplikacja jest bezpłatna. Nie ma kont uczniów, wiadomości prywatnych ani pła
 74. Jako członek bez przypisanego dziecka chcę widzieć tylko zbiorczy postęp zbiórki (zebrano/cel), aby znać stan bez danych innych rodzin.
 75. Jako rodzic przypisany do dziecka chcę otrzymać e-mail 3 dni przed terminem i 3 dni po terminie, tylko gdy pozostaje kwota do zapłaty, aby nie przegapić składki.
 76. Jako rodzic chcę wyłączyć e-mailowe przypomnienia o składkach niezależnie od dziennego podsumowania, aby ograniczyć wiadomości.
-77. Jako zarządzający chcę zakończyć zbiórkę, aby nie pojawiała się jako aktywna; historia i rozliczenie pozostają do odczytu. (założenie)
+77. Jako zarządzający chcę zakończyć zbiórkę, aby nie pojawiała się jako aktywna; historia i rozliczenie pozostają do odczytu.
 
 ### Aktualności szkoły
 
 78. Jako system chcę co 2–3 dni pobierać aktualności ze strony każdej szkoły, w której zatwierdzono co najmniej jedną klasę, aby gość widział aktualne informacje.
 79. Jako system chcę zapisywać tytuł, datę, krótki fragment i link do pełnej wiadomości oraz wykrywać duplikaty, aby lista była czytelna.
 80. Jako system chcę przy nieobsługiwanej stronie zapisać tylko link do aktualności szkoły i nie blokować klasy, aby awaria źródła nie psuła działania.
-81. Jako operator chcę przypisać szkole adres strony aktualności albo oznaczyć źródło jako nieobsługiwane, aby sterować integracją bez zmian w kodzie. (założenie)
+81. Jako system chcę brać adres strony szkoły z importu listy szkół i samodzielnie wykrywać źródło aktualności (RSS albo strona aktualności), aby integracja nie wymagała ręcznego mapowania; bez wykrytego źródła pokazuję link do strony szkoły.
 
 ### Powiadomienia
 
@@ -235,6 +235,8 @@ Moduły głębokie, na które warto poświęcić testy przed resztą: Dostęp (w
 - Brak powtarzalności wydarzeń — odrzucone, użytkownik wybrał proste powtarzanie.
 - Edycja pojedynczych wystąpień serii — odrzucone na rzecz edycji serii i odwoływania wystąpień.
 - Osobna biblioteka plików w zakładce Dokumenty — odrzucone, wystarczy widok załączników wpisów.
+- Ręczne przypisywanie stron aktualności przez operatora — odrzucone, adresy pochodzą z importu, a źródło jest wykrywane automatycznie.
+- Zbiórka kończąca się sama po terminie — odrzucone, zarządzający zamyka ją ręcznie.
 - Streszczenia aktualności szkolnych generowane przez AI — poza zakresem; „fragment" jest wycinkiem źródła.
 - Neon PostgreSQL zamiast D1 — odłożone; D1 wystarcza dla pilotażu, Neon wraca tylko przy konkretnym braku.
 
@@ -245,7 +247,7 @@ Ogólne kryteria „gotowe": `npm run build` przechodzi; testy modułów backend
 | Historyjki | Weryfikacja |
 |---|---|
 | 1–3 | Test integracyjny: gość pobiera listę szkół, klasy szkoły i publiczne wpisy klasy; test przeglądarkowy: „obserwuj klasę" przetrwa odświeżenie strony, a wyczyszczenie pamięci je usuwa. |
-| 4–5, 74–77 | Test adaptera na zapisanych próbkach RSS i HTML dwóch szkół; test fallbacku dla nieobsługiwanej strony zwraca sam link; artefakt: wpisy aktualności w D1 po ręcznym uruchomieniu zadania cyklicznego; drugie uruchomienie nie tworzy duplikatów. |
+| 4–5, 78–81 | Test adaptera na zapisanych próbkach RSS i HTML dwóch szkół; test fallbacku dla nieobsługiwanej strony zwraca sam link; artefakt: wpisy aktualności w D1 po ręcznym uruchomieniu zadania cyklicznego; drugie uruchomienie nie tworzy duplikatów. |
 | 6–8 | Test integracyjny formularza: brak telefonu odrzucony; zgłoszenie bez potwierdzenia e-maila nie jest widoczne dla operatora; zgłoszenie duplikatu klasy zwraca wskazanie istniejącej klasy zamiast utworzenia. |
 | 9–12 | Test panelu operatora: zatwierdzenie tworzy zaproszenie założycielskie i wysyła e-mail (sprawdzane w skrzynce testowej dostawcy); odrzucenie nie tworzy zaproszenia; druga klasa tej samej osoby wymaga nowej akceptacji. |
 | 13–15 | Test: operator wyznacza następcę założyciela; test: operator odbiera rolę wychowawcy; procedura bootstrapu operatora opisana w README i sprawdzona na świeżej bazie lokalnej. |
@@ -291,11 +293,6 @@ Progi jakości: brak endpointu wewnętrznego bez testu negatywnego; czas odpowie
 - Wgrywanie plików poza wpisami.
 
 ## Uwagi
-
-### Do potwierdzenia przed danym etapem
-
-- Zakończenie zbiórki (77) i przypisanie strony aktualności przez operatora (81).
-- Eksport archiwum obejmuje rozliczenia składek (89); w discovery mowa była o wpisach, komentarzach i plikach.
 
 ### Otwarte kwestie z discovery (bez zmian)
 

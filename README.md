@@ -2,6 +2,21 @@
 
 Polski landing page dla platformy komunikacji klasowej, z autorską ilustracją izometryczną i interaktywnym demo. Estetyka inspirowana Minecraftem: leśna zieleń, ciepła biel i detale z klocków.
 
+## Warianty wyglądu
+
+- `main` — oryginalna jasna wersja, aktualnie dostępna na Cloudflare.
+- `design/pixel-dark` — lokalna propozycja: ciemna leśna paleta, Pixelify Sans w nagłówkach, klockowe ramki i przyciski, dodatkowe fragmenty wyspy i wieczorna ilustracja. Warstwa stylów wariantu jest w `apps/user-application/src/pixel-theme.css`.
+
+Przełączanie przy czystym drzewie roboczym:
+
+```sh
+git switch main              # Powrót do jasnej wersji
+git switch design/pixel-dark # Powrót do ciemnego wariantu
+npm run dev                 # Podgląd lokalny
+```
+
+W razie działającego serwera Vite wystarczy odświeżyć stronę po zmianie brancha. Ciemny wariant nie został wdrożony na Cloudflare.
+
 ## Uruchomienie
 
 Wymagany Node.js 22.12+ oraz npm. Z katalogu głównego:

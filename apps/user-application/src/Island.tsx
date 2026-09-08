@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 
 type Block = { x: number; y: number; z: number; color: string; side: string; dark: string };
 const palettes = {
-  grass: ['#94b765', '#72934f', '#587e46'], dirt: ['#b89470', '#927458', '#795f4c'],
-  leaf: ['#789c50', '#527740', '#365c36'], lightLeaf: ['#a6bb6d', '#829a52', '#587d43'],
-  wood: ['#a38c62', '#856849', '#674e3b'], wall: ['#fff1d2', '#e6d5b4', '#cbbba0'],
-  roof: ['#ce8059', '#b36245', '#904a37'], glass: ['#b2d4cb', '#83b4ac', '#60918d'],
-  path: ['#e9d7ad', '#c5b28c', '#b1a078'], water: ['#93c4c7', '#77b3bd', '#5b9eac'],
+  grass: ['#84b85f', '#52783e', '#355934'], dirt: ['#8f7352', '#66503c', '#483d30'],
+  leaf: ['#537e46', '#365c38', '#23432d'], lightLeaf: ['#88ad57', '#5b813e', '#395d30'],
+  wood: ['#ac8b52', '#82613d', '#513f2c'], wall: ['#dddbb5', '#a6ae88', '#7a896c'],
+  roof: ['#b17c52', '#835635', '#5d3f2b'], glass: ['#ffe9a0', '#efce72', '#d8ac55'],
+  path: ['#c5ba83', '#92875a', '#726a49'], water: ['#488c8b', '#306c73', '#234d5b'],
 } as const;
 export default function Island() {
   const blocks = useMemo(() => {
@@ -35,12 +35,19 @@ export default function Island() {
     };
     tree(1, 4, 2); tree(10, 3, 3, true); tree(2, 8, 2, true);
     add(9, 10, 2, 'wood'); add(10, 10, 2, 'wood');
+    // Small detached chunks make the whole scene feel like a floating voxel world.
+    add(-2, 4, 0, 'grass'); add(-2, 4, -1, 'dirt');
+    add(12, 5, 0, 'grass'); add(12, 5, -1, 'dirt');
+    add(12, 6, 0, 'grass'); add(12, 6, -1, 'dirt');
+    add(4, 12, -1, 'grass'); add(4, 12, -2, 'dirt');
     return result.sort((a, b) => (a.x + a.y) - (b.x + b.y) || a.z - b.z);
   }, []);
   return <svg className="island" viewBox="0 0 650 560" role="img" aria-label="Izometryczna szkoła z klocków na zielonej wyspie, z drzewami i małym stawem">
     <defs><filter id="shadow"><feGaussianBlur stdDeviation="15" /></filter><linearGradient id="groundFade" x2="0" y2="1"><stop stopColor="#d5d9bb"/><stop offset="1" stopColor="#e9ecd9"/></linearGradient></defs>
-    <ellipse cx="328" cy="505" rx="207" ry="26" fill="#6c7c55" opacity=".13" filter="url(#shadow)"/>
-    <g className="cloud cloud-one" fill="#fff"><path d="M70 158h22v-15h49v15h29v21H70Z"/><path d="M465 108h22V90h39v18h35v19h-96Z"/></g>
+    <ellipse cx="328" cy="513" rx="207" ry="26" fill="#07150e" opacity=".65" filter="url(#shadow)"/>
+    <g className="pixel-stars" fill="#b7c58d"><path d="M88 77h4v4h-4zM209 108h3v3h-3zM399 42h4v4h-4zM571 171h4v4h-4zM61 245h3v3h-3zM520 58h3v3h-3zM581 405h3v3h-3z"/><path d="M160 35h4v-4h4v4h4v4h-4v4h-4v-4h-4Z" opacity=".65"/></g>
+    <g className="pixel-moon"><path d="M484 56h30v30h-30Z" fill="#d4d6a0"/><path d="M484 56h10v10h-10zm20 20h10v10h-10z" fill="#b3be88"/></g>
+    <g className="cloud cloud-one" fill="#405844" opacity=".4"><path d="M70 158h22v-15h49v15h29v21H70Z"/><path d="M465 108h22V90h39v18h35v19h-96Z"/></g>
     <g className="island-blocks">{blocks.map((b, i) => {
       const x = 310 + (b.x - b.y) * 23, y = 235 + (b.x + b.y) * 11.5 - b.z * 23;
       return <g key={i}><path d={`M${x},${y}l23,11.5 -23,11.5 -23,-11.5Z`} fill={b.color}/><path d={`M${x - 23},${y + 11.5}l23,11.5v23l-23,-11.5Z`} fill={b.side}/><path d={`M${x},${y + 23}l23,-11.5v23l-23,11.5Z`} fill={b.dark}/></g>;

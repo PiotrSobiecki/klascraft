@@ -71,7 +71,7 @@
   .pixel-moon path:first-child { fill: #e9c967; }
   .pixel-moon path:last-child { fill: #dcb955; }
   .cloud-one { fill: #ffffff; opacity: .8; }
-  .island>ellipse { opacity: .16; }
+  .island ellipse { opacity: .16; }
   .floating-card { background: #f9f7e9f5; border-color: #afbe91; border-right-color: #99ad7b; border-bottom-color: #99ad7b; box-shadow: 5px 5px 0 #a4b38455; }
   .floating-card strong { color: #405536; }
   .floating-card small { color: #687853; }

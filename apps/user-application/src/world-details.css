@@ -1,0 +1,31 @@
+#main { position: relative; isolation: isolate; }
+.background-blocks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.ambient-block { position: absolute; opacity: .52; filter: drop-shadow(4px 8px 0 #07180c30); }
+:root[data-theme='light'] .ambient-block { opacity: .42; }
+.polish-flag { filter: none; }
+/* Move the small status cards off the enlarged school facade. */
+.float-message { top: 42px; left: -8px; }
+.float-fund { bottom: 50px; right: -5px; }
+.art-caption { top: 10px; right: 105px; }
+@media(min-width:801px) and (max-width:1400px) {
+  .hero-art { width: 104%; margin-left: -4%; }
+}
+@media(max-width:1150px) {
+  .float-message { top: 38px; left: -4px; }
+  .float-fund { bottom: 49px; right: 0; }
+  .ambient-block { opacity: .25; }
+}
+@media(max-width:800px) {
+  .float-message { top: 25px; left: 6px; }
+  .float-fund { bottom: 35px; }
+  .art-caption { top: 9px; right: 55px; }
+  .ambient-block { max-width: 34px; }
+}
+@media(max-width:540px) {
+  .hero-art { margin-top: 20px; height: 400px; }
+  .float-message { top: 5px; left: 0; }
+  .float-fund { bottom: 28px; right: 0; }
+  .art-caption { top: -7px; right: 30px; font-size: 5px; }
+  .ambient-block { opacity: .18; max-width: 27px; }
+  :root[data-theme='light'] .ambient-block { opacity: .2; }
+}

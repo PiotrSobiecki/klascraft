@@ -5,5 +5,6 @@ import { initializeTheme } from './ThemeToggle';
 import './styles.css';
 import './pixel-theme.css';
 import './pixel-light.css';
+import './world-details.css';
 initializeTheme();
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

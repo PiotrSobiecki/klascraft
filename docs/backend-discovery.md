@@ -177,11 +177,13 @@ Nie są to zatwierdzone założenia; nie przedstawiać propozycji technicznych j
 
 ## Następny krok
 
-### Uzupełnienia z blueprint (Q151–Q168)
+### Uzupełnienia z blueprint (Q151–Q176)
 
 - Kalendarz i składki wchodzą do PRD (Q151). Składki to wyłącznie ewidencja wpłat dokonywanych poza aplikacją (Q152); szczegóły w PRD.
 - Docelowe repozytorium: https://github.com/PiotrSobiecki/klascraft. Użytkownik upoważnił do publikacji brancha, dokumentacji, PRD i issues.
-- PRD: `docs/prd.md`. Wymagania kalendarza nie były przedmiotem wywiadu i są w PRD oznaczone jako założenia do potwierdzenia.
+- Kalendarz (Q169–Q175): wydarzenia dodaje każdy dorosły z klasy, publiczne tylko zarządzający; data, opcjonalna godzina, tytuł, miejsce i opis; bez komentarzy; wpis może dołączyć termin; e-mail dzień przed z wyłączeniem w profilu; powtarzanie co tydzień lub miesiąc do daty, edycja całej serii i odwoływanie wystąpień.
+- Dokumenty (Q176): widok załączników wpisów klasy, bez osobnej biblioteki plików.
+- PRD: `docs/prd.md`.
 
 Przygotować PRD na podstawie tych ustaleń, skonfrontować je z istniejącym frontendem i rozstrzygnąć otwarte kwestie przez inspekcję projektu, badanie integracji lub pojedyncze pytania tam, gdzie potrzebna jest decyzja produktowa. Potem przygotować pionowe etapy implementacji całego zakresu i kryteria odbioru, szczególnie dostępu do klas, publicznych plików, zaproszeń i zmian ról.
 

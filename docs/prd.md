@@ -1,8 +1,8 @@
 # KlasCraft — PRD backendu pilotażu
 
-Data: 2026-09-08. Źródła: `docs/backend-discovery.md` (Q1–Q150) oraz wywiad blueprint Q151–Q168 (składki). Dokument opisuje docelowy zakres, nie istniejącą implementację. Obecny frontend jest demonstracją z fikcyjnymi danymi.
+Data: 2026-09-08. Źródła: `docs/backend-discovery.md` (Q1–Q150) oraz wywiad blueprint Q151–Q176 (składki, kalendarz, dokumenty). Dokument opisuje docelowy zakres, nie istniejącą implementację. Obecny frontend jest demonstracją z fikcyjnymi danymi.
 
-Ustalenia oznaczone „(założenie)" nie były przedmiotem decyzji użytkownika i wymagają potwierdzenia przed implementacją danego etapu. Dotyczy to całego kalendarza oraz kilku szczegółów w składkach i aktualnościach.
+Ustalenia oznaczone „(założenie)" nie były przedmiotem decyzji użytkownika i wymagają potwierdzenia przed implementacją danego etapu. Dotyczy to zamykania zbiórki i przypisywania stron aktualności przez operatora.
 
 ## Problem
 
@@ -62,7 +62,7 @@ Aplikacja jest bezpłatna. Nie ma kont uczniów, wiadomości prywatnych ani pła
 17. Jako użytkownik chcę potwierdzić adres e-mail, logować się i resetować hasło, aby bezpiecznie korzystać z konta.
 18. Jako użytkownik chcę należeć do wielu klas z osobną rolą w każdej, aby być wychowawcą w jednej i rodzicem w innej.
 19. Jako użytkownik chcę usunąć konto, aby zakończyć korzystanie z serwisu; moje wpisy, komentarze i pliki pozostają z podpisem „Usunięte konto".
-20. Jako użytkownik chcę w profilu włączać i wyłączać osobno dzienne podsumowanie e-mail i przypomnienia o składkach, aby kontrolować wysyłkę.
+20. Jako użytkownik chcę w profilu włączać i wyłączać osobno dzienne podsumowanie e-mail, przypomnienia o składkach i przypomnienia o wydarzeniach, aby kontrolować wysyłkę.
 21. Jako założyciel chcę przed usunięciem konta lub opuszczeniem klasy przekazać funkcję następcy, aby klasa pozostała zarządzana; bez następcy system blokuje operację i kieruje do operatora.
 
 ### Klasa, zaproszenia i role
@@ -103,60 +103,64 @@ Aplikacja jest bezpłatna. Nie ma kont uczniów, wiadomości prywatnych ani pła
 52. Jako zalogowany dorosły, także spoza klasy, chcę zgłosić publiczny wpis, aby zarządzający mogli zareagować; gość nie może zgłaszać.
 53. Jako zarządzający chcę otrzymać zgłoszenie w dzwoneczku i ukryć wpis albo odrzucić zgłoszenie, aby moderacja pozostała w klasie; zgłoszenie nie ukrywa wpisu automatycznie.
 
-### Kalendarz (założenia do potwierdzenia)
+### Kalendarz i dokumenty
 
-54. Jako członek chcę dodać wydarzenie z datą, opcjonalną godziną, tytułem i krótkim opisem lub miejscem, aby klasa znała terminy. (założenie: te same reguły uprawnień i widoczności co dla wpisów)
-55. Jako zarządzający chcę oznaczyć wydarzenie jako publiczne, aby uczniowie i rodzice spoza klasy widzieli np. wycieczkę; wydarzenia wewnętrzne, np. zebranie rodziców, widzą tylko dorośli z klasy. (założenie)
-56. Jako członek chcę widzieć nadchodzące wydarzenia na tablicy klasy i pełną listę w kalendarzu, aby planować. (założenie)
-57. Jako gość chcę widzieć publiczne wydarzenia klasy w jej publicznym widoku. (założenie)
-58. Jako autor wydarzenia chcę je edytować i usuwać na zasadach wpisów, a zarządzający ukrywać i usuwać cudze. (założenie)
-59. Jako członek chcę, aby nowe wydarzenia trafiały do dzwoneczka i dziennego podsumowania jak wpisy. (założenie)
+54. Jako członek chcę dodać wydarzenie z datą, opcjonalną godziną rozpoczęcia, tytułem oraz opcjonalnym miejscem i opisem, aby klasa znała terminy; bez godziny wydarzenie jest całodniowe.
+55. Jako zarządzający chcę oznaczyć wydarzenie jako publiczne, aby uczniowie i rodzice spoza klasy widzieli np. wycieczkę; zwykły rodzic dodaje tylko wydarzenia wewnętrzne, jak przy wpisach.
+56. Jako członek chcę widzieć nadchodzące wydarzenia na tablicy klasy i pełną listę w kalendarzu, aby planować.
+57. Jako gość chcę widzieć publiczne wydarzenia klasy w jej publicznym widoku.
+58. Jako autor wydarzenia chcę je edytować i usuwać na zasadach wpisów, a zarządzający ukrywać i usuwać cudze; wydarzenia nie mają komentarzy, dyskusja toczy się we wpisie.
+59. Jako autor wpisu chcę opcjonalnie dołączyć do niego termin, aby wydarzenie pojawiło się w kalendarzu z linkiem do wpisu i jego dyskusji.
+60. Jako członek chcę, aby nowe wydarzenia trafiały do dzwoneczka i dziennego podsumowania jak wpisy, oraz otrzymać e-mail dzień przed wydarzeniem, z osobnym wyłączeniem w profilu.
+61. Jako członek chcę ustawić powtarzanie wydarzenia co tydzień albo co miesiąc do wskazanej daty, aby nie wpisywać basenu osobno na każdy wtorek.
+62. Jako autor serii chcę edytować całą serię naraz i odwołać pojedyncze wystąpienie, aby odwołany termin zniknął z kalendarza i nie wysłał przypomnienia.
+63. Jako członek chcę w zakładce Dokumenty widzieć wszystkie załączniki z wpisów klasy z filtrem po typie i linkiem do wpisu, aby znaleźć zgodę lub listę bez przeglądania tablicy; gość widzi tam tylko załączniki publicznych wpisów.
 
 ### Składki
 
-60. Jako rodzic chcę w profilu wybrać klasę i dziecko z listy dzieci tej klasy albo dodać brakujące dziecko (imię i nazwisko), aby mieć dostęp do jego rozliczeń od razu, bez potwierdzania.
-61. Jako drugi rodzic chcę wybrać tę samą pozycję dziecka, aby oboje widzieć jedno rozliczenie i nie płacić podwójnie.
-62. Jako zarządzający chcę dodać dziecko do listy klasy i bezpośrednio przypisać do niego konta rodziców, aby uzupełnić listę za rodziców.
-63. Jako zarządzający chcę utworzyć zbiórkę z tytułem, opisem, wspólną kwotą na dziecko i opcjonalnym terminem, obejmującą domyślnie wszystkie dzieci klasy albo wybraną część, aby ewidencjonować wpłaty na wycieczkę, prezenty czy fundusz klasowy.
-64. Jako zarządzający chcę indywidualnie zmienić kwotę albo zwolnić dziecko ze składki, aby uwzględnić wyjątki.
-65. Jako zarządzający chcę odnotować wpłatę otrzymaną poza aplikacją (kwota, data, opcjonalna notatka), także częściową i kilkukrotną, aby rozliczenie pokazywało sumę wpłaconą i kwotę pozostałą.
-66. Jako zarządzający chcę skorygować albo anulować błędną wpłatę z zachowaniem historii (kto, kiedy, co zmienił), aby rozliczenie było wiarygodne.
-67. Jako zarządzający chcę dopisać dziecko dodane po utworzeniu zbiórki do wybranych zbiórek, aby nie naliczać składek automatycznie wstecz.
-68. Jako rodzic chcę widzieć rozliczenia tylko swoich dzieci: kwotę należną, wpłaconą, pozostałą i oznaczenie zaległości po terminie.
-69. Jako zarządzający chcę widzieć rozliczenia wszystkich dzieci w klasie, aby prowadzić zbiórkę.
-70. Jako członek bez przypisanego dziecka chcę widzieć tylko zbiorczy postęp zbiórki (zebrano/cel), aby znać stan bez danych innych rodzin.
-71. Jako rodzic przypisany do dziecka chcę otrzymać e-mail 3 dni przed terminem i 3 dni po terminie, tylko gdy pozostaje kwota do zapłaty, aby nie przegapić składki.
-72. Jako rodzic chcę wyłączyć e-mailowe przypomnienia o składkach niezależnie od dziennego podsumowania, aby ograniczyć wiadomości.
-73. Jako zarządzający chcę zakończyć zbiórkę, aby nie pojawiała się jako aktywna; historia i rozliczenie pozostają do odczytu. (założenie)
+64. Jako rodzic chcę w profilu wybrać klasę i dziecko z listy dzieci tej klasy albo dodać brakujące dziecko (imię i nazwisko), aby mieć dostęp do jego rozliczeń od razu, bez potwierdzania.
+65. Jako drugi rodzic chcę wybrać tę samą pozycję dziecka, aby oboje widzieć jedno rozliczenie i nie płacić podwójnie.
+66. Jako zarządzający chcę dodać dziecko do listy klasy i bezpośrednio przypisać do niego konta rodziców, aby uzupełnić listę za rodziców.
+67. Jako zarządzający chcę utworzyć zbiórkę z tytułem, opisem, wspólną kwotą na dziecko i opcjonalnym terminem, obejmującą domyślnie wszystkie dzieci klasy albo wybraną część, aby ewidencjonować wpłaty na wycieczkę, prezenty czy fundusz klasowy.
+68. Jako zarządzający chcę indywidualnie zmienić kwotę albo zwolnić dziecko ze składki, aby uwzględnić wyjątki.
+69. Jako zarządzający chcę odnotować wpłatę otrzymaną poza aplikacją (kwota, data, opcjonalna notatka), także częściową i kilkukrotną, aby rozliczenie pokazywało sumę wpłaconą i kwotę pozostałą.
+70. Jako zarządzający chcę skorygować albo anulować błędną wpłatę z zachowaniem historii (kto, kiedy, co zmienił), aby rozliczenie było wiarygodne.
+71. Jako zarządzający chcę dopisać dziecko dodane po utworzeniu zbiórki do wybranych zbiórek, aby nie naliczać składek automatycznie wstecz.
+72. Jako rodzic chcę widzieć rozliczenia tylko swoich dzieci: kwotę należną, wpłaconą, pozostałą i oznaczenie zaległości po terminie.
+73. Jako zarządzający chcę widzieć rozliczenia wszystkich dzieci w klasie, aby prowadzić zbiórkę.
+74. Jako członek bez przypisanego dziecka chcę widzieć tylko zbiorczy postęp zbiórki (zebrano/cel), aby znać stan bez danych innych rodzin.
+75. Jako rodzic przypisany do dziecka chcę otrzymać e-mail 3 dni przed terminem i 3 dni po terminie, tylko gdy pozostaje kwota do zapłaty, aby nie przegapić składki.
+76. Jako rodzic chcę wyłączyć e-mailowe przypomnienia o składkach niezależnie od dziennego podsumowania, aby ograniczyć wiadomości.
+77. Jako zarządzający chcę zakończyć zbiórkę, aby nie pojawiała się jako aktywna; historia i rozliczenie pozostają do odczytu. (założenie)
 
 ### Aktualności szkoły
 
-74. Jako system chcę co 2–3 dni pobierać aktualności ze strony każdej szkoły, w której zatwierdzono co najmniej jedną klasę, aby gość widział aktualne informacje.
-75. Jako system chcę zapisywać tytuł, datę, krótki fragment i link do pełnej wiadomości oraz wykrywać duplikaty, aby lista była czytelna.
-76. Jako system chcę przy nieobsługiwanej stronie zapisać tylko link do aktualności szkoły i nie blokować klasy, aby awaria źródła nie psuła działania.
-77. Jako operator chcę przypisać szkole adres strony aktualności albo oznaczyć źródło jako nieobsługiwane, aby sterować integracją bez zmian w kodzie. (założenie)
+78. Jako system chcę co 2–3 dni pobierać aktualności ze strony każdej szkoły, w której zatwierdzono co najmniej jedną klasę, aby gość widział aktualne informacje.
+79. Jako system chcę zapisywać tytuł, datę, krótki fragment i link do pełnej wiadomości oraz wykrywać duplikaty, aby lista była czytelna.
+80. Jako system chcę przy nieobsługiwanej stronie zapisać tylko link do aktualności szkoły i nie blokować klasy, aby awaria źródła nie psuła działania.
+81. Jako operator chcę przypisać szkole adres strony aktualności albo oznaczyć źródło jako nieobsługiwane, aby sterować integracją bez zmian w kodzie. (założenie)
 
 ### Powiadomienia
 
-78. Jako członek chcę po zalogowaniu widzieć w dzwoneczku nowe wpisy i komentarze z moich klas oraz sprawy wymagające działania (zgłoszenia, zaproszenie wychowawcy, przekazanie funkcji), zgodnie z moimi uprawnieniami.
-79. Jako członek chcę oznaczać powiadomienia jako przeczytane, aby dzwoneczek pokazywał tylko nowe.
-80. Jako członek chcę otrzymywać codzienne podsumowanie e-mail z tytułami i fragmentami nowych wpisów, także wewnętrznych, bez komentarzy, i móc je wyłączyć.
-81. Jako system chcę wysyłać e-maile potwierdzenia adresu, resetu hasła, zaproszeń, decyzji o zgłoszeniu, przypomnień o składkach i przypomnienia o usunięciu archiwum.
-82. Jako system chcę nie wysyłać podsumowań ani przypomnień osobom, które utraciły członkostwo przed wysyłką.
+82. Jako członek chcę po zalogowaniu widzieć w dzwoneczku nowe wpisy i komentarze z moich klas oraz sprawy wymagające działania (zgłoszenia, zaproszenie wychowawcy, przekazanie funkcji), zgodnie z moimi uprawnieniami.
+83. Jako członek chcę oznaczać powiadomienia jako przeczytane, aby dzwoneczek pokazywał tylko nowe.
+84. Jako członek chcę otrzymywać codzienne podsumowanie e-mail z tytułami i fragmentami nowych wpisów, także wewnętrznych, bez komentarzy, i móc je wyłączyć.
+85. Jako system chcę wysyłać e-maile potwierdzenia adresu, resetu hasła, zaproszeń, decyzji o zgłoszeniu, przypomnień o składkach i przypomnienia o usunięciu archiwum.
+86. Jako system chcę nie wysyłać podsumowań ani przypomnień osobom, które utraciły członkostwo przed wysyłką.
 
 ### Archiwum
 
-83. Jako zarządzający chcę zarchiwizować klasę po ukończeniu szkoły, aby zakończyć publikowanie i zapraszanie; członkowie czytają historię.
-84. Jako system chcę przy archiwizacji zamknąć publiczny dostęp do treści zewnętrznych i ich plików.
-85. Jako zarządzający chcę wyeksportować archiwum z wpisami, komentarzami, plikami i rozliczeniami składek, aby zachować historię klasy.
-86. Jako zarządzający chcę 30 dni przed usunięciem archiwum dostać e-mail z datą usunięcia i linkiem do eksportu wymagającym zalogowania.
-87. Jako system chcę po 3 latach od archiwizacji usunąć klasę, wpisy, komentarze, załączniki i rozliczenia, aby dotrzymać retencji.
+87. Jako zarządzający chcę zarchiwizować klasę po ukończeniu szkoły, aby zakończyć publikowanie i zapraszanie; członkowie czytają historię.
+88. Jako system chcę przy archiwizacji zamknąć publiczny dostęp do treści zewnętrznych i ich plików.
+89. Jako zarządzający chcę wyeksportować archiwum z wpisami, komentarzami, plikami i rozliczeniami składek, aby zachować historię klasy.
+90. Jako zarządzający chcę 30 dni przed usunięciem archiwum dostać e-mail z datą usunięcia i linkiem do eksportu wymagającym zalogowania.
+91. Jako system chcę po 3 latach od archiwizacji usunąć klasę, wpisy, komentarze, załączniki i rozliczenia, aby dotrzymać retencji.
 
 ### Bezpieczeństwo dostępu (przekrojowe)
 
-88. Jako system chcę przy każdym żądaniu sprawdzać serwerowo sesję, członkostwo i rolę w danej klasie, aby ukrycie elementu w interfejsie nigdy nie było jedyną barierą.
-89. Jako system chcę nigdy nie zwracać osobom spoza klasy komentarzy, wpisów wewnętrznych, danych autorów, listy uczestników, listy dzieci ani rozliczeń.
-90. Jako system chcę rejestrować zmiany członkostw, ról, decyzje operatora i korekty wpłat, aby można było odtworzyć, kto co zmienił.
+92. Jako system chcę przy każdym żądaniu sprawdzać serwerowo sesję, członkostwo i rolę w danej klasie, aby ukrycie elementu w interfejsie nigdy nie było jedyną barierą.
+93. Jako system chcę nigdy nie zwracać osobom spoza klasy komentarzy, wpisów wewnętrznych, danych autorów, listy uczestników, listy dzieci ani rozliczeń.
+94. Jako system chcę rejestrować zmiany członkostw, ról, decyzje operatora i korekty wpłat, aby można było odtworzyć, kto co zmienił.
 
 ## Decyzje implementacyjne
 
@@ -168,7 +172,7 @@ Backend Hono dzieli się na moduły z wąskimi interfejsami. Każdy z nich jest 
 |---|---|---|
 | Dostęp | Sesje, hasła, zaproszenia, członkostwa, jedna funkcja sprawdzająca uprawnienie aktora do akcji na zasobie | `can(aktor, akcja, zasób)`, wystawienie i realizacja zaproszenia |
 | Szkoły i klasy | Katalog szkół, zgłoszenia, panel operatora, unikalność klas, przenoszenie roczników, role i przekazywanie funkcji | Cykl życia klasy i członkostw |
-| Treści | Wpisy, wydarzenia (wpis z datą), komentarze, widoczność, ukrywanie, zgłoszenia publiczne | Publikacja, zmiana widoczności, moderacja |
+| Treści | Wpisy, wydarzenia i serie, komentarze, widoczność, ukrywanie, zgłoszenia publiczne | Publikacja, zmiana widoczności, moderacja |
 | Pliki | Przyjmowanie, walidacja typu i rozmiaru, przechowywanie w R2, wydawanie plików wyłącznie przez backend z kontrolą widoczności | Wgraj, pobierz, unieważnij publiczny dostęp |
 | Składki | Dzieci klasy, powiązania rodzic–dziecko, zbiórki, dziennik wpłat i korekt tylko-dopisywany, obliczanie sald | Utwórz zbiórkę, zapisz wpłatę, saldo dziecka/zbiórki |
 | Aktualności | Adaptery pobierania (RSS, HTML), deduplikacja, fallback do linku | Pobierz dla szkoły, lista dla gościa |
@@ -188,7 +192,8 @@ Moduły głębokie, na które warto poświęcić testy przed resztą: Dostęp (w
 - Publiczne endpointy zwracają wyłącznie projekcję danych: nazwa klasy jako autor, brak komentarzy, brak identyfikatorów osób.
 - Usunięcie konta odpina treści od profilu (podpis „Usunięte konto"), nie kasuje treści.
 - Składki są ewidencją: kwota należna per dziecko, wpłaty i korekty jako niezmienne wpisy dziennika, saldo wyliczane z dziennika.
-- Wydarzenia kalendarza są typem wpisu z datą i godziną; dziedziczą reguły widoczności i uprawnień wpisów. (założenie)
+- Wydarzenia kalendarza są osobnym typem treści z datą, godziną i regułą powtarzania; dziedziczą reguły widoczności i uprawnień wpisów, nie mają komentarzy. Seria jest przechowywana jako reguła z listą odwołanych wystąpień, nie jako kopie. Wpis może wskazywać jedno wydarzenie.
+- Zakładka Dokumenty jest projekcją załączników wpisów; nie ma osobnego magazynu plików.
 - Frontend odróżnia działającą aplikację od demo: demo pozostaje na landing page z oznaczeniem, a widok „Uczeń" zostaje zastąpiony publicznym widokiem gościa. Zakładka „Rozmowy rodziców" znika, jej rolę pełnią wpisy wewnętrzne z komentarzami.
 
 ## Założenia
@@ -200,7 +205,7 @@ Moduły głębokie, na które warto poświęcić testy przed resztą: Dostęp (w
 - Ryzyko przyjęte przez użytkownika: otwarty link może trafić do dziecka lub osoby spoza klasy; rodzic z klasy może przypisać sobie cudze dziecko w składkach. Interfejs nie przedstawia tych mechanizmów jako weryfikacji.
 - Prawne: dane osobowe dorosłych i imiona dzieci są przetwarzane w UE; regulamin i polityka prywatności powstaną przed uruchomieniem; sposób obsługi żądań usunięcia danych nie jest rozstrzygnięty tym dokumentem.
 - E-mail: dostawca pozwala wysyłać z własnej domeny z SPF/DKIM/DMARC i mieści się w budżecie, który dopiero zostanie oszacowany.
-- Kalendarz: reguły identyczne z wpisami wystarczą; brak powtarzalności wydarzeń, przypomnień i eksportu do kalendarzy zewnętrznych w pilotażu.
+- Kalendarz: powtarzanie co tydzień i co miesiąc pokrywa potrzeby klas; brak eksportu do kalendarzy zewnętrznych w pilotażu.
 - Brak AI: żadna funkcja nie generuje treści ani nie rozmawia z użytkownikiem; obowiązki przejrzystości z art. 50 AI Act nie mają zastosowania, dopóki to się nie zmieni.
 
 ## Rozważone alternatywy
@@ -222,6 +227,14 @@ Moduły głębokie, na które warto poświęcić testy przed resztą: Dostęp (w
 - Harmonogram przypomnień ustalany per zbiórka — odrzucone na rzecz stałych 3 dni przed i po terminie.
 - Obowiązkowe przypomnienia o składkach — odrzucone, rodzic może je wyłączyć.
 - Automatyczne dopisanie nowego dziecka do otwartych zbiórek — odrzucone, zarządzający dopisuje ręcznie.
+- Wydarzenia dodawane tylko przez zarządzających — odrzucone, rodzice wpisują terminy wewnętrzne jak wpisy.
+- Data lub godzina zakończenia wydarzenia — odrzucone na start, wystarczy rozpoczęcie.
+- Komentarze pod wydarzeniami — odrzucone, dyskusja toczy się we wpisie powiązanym z terminem.
+- Wydarzenia niezależne od wpisów — odrzucone, wpis może dołączyć termin.
+- Brak przypomnień o wydarzeniach — odrzucone, użytkownik wybrał e-mail dzień przed.
+- Brak powtarzalności wydarzeń — odrzucone, użytkownik wybrał proste powtarzanie.
+- Edycja pojedynczych wystąpień serii — odrzucone na rzecz edycji serii i odwoływania wystąpień.
+- Osobna biblioteka plików w zakładce Dokumenty — odrzucone, wystarczy widok załączników wpisów.
 - Streszczenia aktualności szkolnych generowane przez AI — poza zakresem; „fragment" jest wycinkiem źródła.
 - Neon PostgreSQL zamiast D1 — odłożone; D1 wystarcza dla pilotażu, Neon wraca tylko przy konkretnym braku.
 
@@ -246,16 +259,20 @@ Ogólne kryteria „gotowe": `npm run build` przechodzi; testy modułów backend
 | 46–49 | Test: komentarz pod publicznym wpisem niewidoczny dla gościa; edycja cudzego wpisu przez zarządzającego odrzucona, ukrycie i usunięcie dozwolone; usunięcie wpisu usuwa komentarze i pliki (obiekt w R2 znika). |
 | 50–51 | Test: szósty plik, 11 MB, typ SVG odrzucone; bezpośredni adres pliku wewnętrznego bez sesji zwraca 403; po upublicznieniu wpisu ten sam adres działa dla gościa. |
 | 52–53 | Test: gość nie może zgłosić; zalogowany spoza klasy może; zgłoszenie tworzy powiadomienie zarządzającym; wpis pozostaje widoczny do decyzji. |
-| 54–59 | Test: wydarzenie wewnętrzne niewidoczne dla gościa, publiczne widoczne; lista nadchodzących na tablicy posortowana po dacie; test przeglądarkowy zakładki kalendarza. |
-| 60–62 | Test: dwoje rodziców wybiera to samo dziecko i widzi jedno rozliczenie; nowe dziecko dodane przez rodzica pojawia się na liście klasy; zarządzający przypisuje rodzica bez udziału rodzica. |
-| 63–64, 67 | Test jednostkowy modułu składek: kwota wspólna, indywidualna zmiana, zwolnienie, wybór części dzieci, dopisanie dziecka po utworzeniu; zbiórka bez terminu nie oznacza zaległości. |
-| 65–66 | Test: dwie wpłaty częściowe sumują się; korekta tworzy nowy wpis dziennika i zachowuje poprzedni; saldo po anulowaniu wraca do stanu sprzed wpłaty; dziennik zawiera autora i czas każdej zmiany. |
-| 68–70 | Test: rodzic dostaje 403 na rozliczenie cudzego dziecka; zarządzający widzi wszystkie; członek bez dziecka widzi tylko sumę zebraną i cel. |
-| 71–72 | Test zadania cyklicznego na zamrożonym czasie: e-mail 3 dni przed i 3 dni po terminie tylko przy niezerowym saldzie; po wyłączeniu w profilu brak e-maila, podsumowanie dzienne nadal wychodzi. |
-| 73 | Test: zakończona zbiórka nie przyjmuje wpłat i nie jest na liście aktywnych. |
-| 78–82 | Test: komentarz trafia do dzwoneczka, nie do podsumowania; podsumowanie zawiera tytuł i fragment wpisu wewnętrznego bez pełnej treści; oznaczenie jako przeczytane zmniejsza licznik; usunięty członek nie dostaje podsumowania. |
-| 83–87 | Test: po archiwizacji publikacja i zaproszenia zwracają 403, gość dostaje 404 na dawne publiczne treści; eksport zawiera wpisy, komentarze, pliki i rozliczenia; zadanie cykliczne na zamrożonym czasie wysyła e-mail 30 dni przed i usuwa klasę po 3 latach (obiekty R2 znikają). |
-| 88–90 | Test negatywny każdego endpointu wewnętrznego bez sesji, z sesją spoza klasy i z rolą bez uprawnień; artefakt: wpis w dzienniku zmian po każdej zmianie roli, członkostwa, decyzji operatora i korekcie wpłaty. |
+| 54–58 | Test: rodzic nie może oznaczyć wydarzenia jako publiczne; wydarzenie wewnętrzne niewidoczne dla gościa, publiczne widoczne; lista nadchodzących na tablicy posortowana po dacie; endpoint wydarzenia nie przyjmuje komentarzy; test przeglądarkowy zakładki kalendarza. |
+| 59 | Test: wpis z terminem tworzy wydarzenie z linkiem do wpisu; usunięcie wpisu usuwa wydarzenie; zmiana widoczności wpisu zmienia widoczność wydarzenia. |
+| 60 | Test zadania cyklicznego na zamrożonym czasie: e-mail dzień przed wydarzeniem do dorosłych z klasy, brak po wyłączeniu w profilu, brak dla odwołanego wystąpienia; dodanie wydarzenia tworzy powiadomienie w dzwoneczku. |
+| 61–62 | Test jednostkowy serii: wystąpienia co tydzień i co miesiąc kończą się na dacie końcowej; edycja serii zmienia wszystkie wystąpienia; odwołane wystąpienie nie wraca po edycji serii. |
+| 63 | Test: zakładka Dokumenty zwraca dla członka załączniki wszystkich wpisów klasy, dla gościa tylko z publicznych; filtr po typie działa; każdy element ma link do wpisu. |
+| 64–66 | Test: dwoje rodziców wybiera to samo dziecko i widzi jedno rozliczenie; nowe dziecko dodane przez rodzica pojawia się na liście klasy; zarządzający przypisuje rodzica bez udziału rodzica. |
+| 67–68, 71 | Test jednostkowy modułu składek: kwota wspólna, indywidualna zmiana, zwolnienie, wybór części dzieci, dopisanie dziecka po utworzeniu; zbiórka bez terminu nie oznacza zaległości. |
+| 69–70 | Test: dwie wpłaty częściowe sumują się; korekta tworzy nowy wpis dziennika i zachowuje poprzedni; saldo po anulowaniu wraca do stanu sprzed wpłaty; dziennik zawiera autora i czas każdej zmiany. |
+| 72–74 | Test: rodzic dostaje 403 na rozliczenie cudzego dziecka; zarządzający widzi wszystkie; członek bez dziecka widzi tylko sumę zebraną i cel. |
+| 75–76 | Test zadania cyklicznego na zamrożonym czasie: e-mail 3 dni przed i 3 dni po terminie tylko przy niezerowym saldzie; po wyłączeniu w profilu brak e-maila, podsumowanie dzienne nadal wychodzi. |
+| 77 | Test: zakończona zbiórka nie przyjmuje wpłat i nie jest na liście aktywnych. |
+| 82–86 | Test: komentarz trafia do dzwoneczka, nie do podsumowania; podsumowanie zawiera tytuł i fragment wpisu wewnętrznego bez pełnej treści; oznaczenie jako przeczytane zmniejsza licznik; usunięty członek nie dostaje podsumowania. |
+| 87–91 | Test: po archiwizacji publikacja i zaproszenia zwracają 403, gość dostaje 404 na dawne publiczne treści; eksport zawiera wpisy, komentarze, pliki i rozliczenia; zadanie cykliczne na zamrożonym czasie wysyła e-mail 30 dni przed i usuwa klasę po 3 latach (obiekty R2 znikają). |
+| 92–94 | Test negatywny każdego endpointu wewnętrznego bez sesji, z sesją spoza klasy i z rolą bez uprawnień; artefakt: wpis w dzienniku zmian po każdej zmianie roli, członkostwa, decyzji operatora i korekcie wpłaty. |
 
 Progi jakości: brak endpointu wewnętrznego bez testu negatywnego; czas odpowiedzi API poniżej 500 ms dla listy wpisów klasy na danych pilotażu; zadania cykliczne idempotentne (podwójne uruchomienie nie duplikuje e-maili ani aktualności).
 
@@ -270,15 +287,15 @@ Progi jakości: brak endpointu wewnętrznego bez testu negatywnego; czas odpowie
 - Synchronizacja „obserwuj klasę" między urządzeniami.
 - Szkoły spoza Warszawy i inne niż podstawowe.
 - Aplikacje mobilne i powiadomienia push.
-- Powtarzalne wydarzenia, przypomnienia o wydarzeniach i eksport do kalendarzy zewnętrznych.
+- Eksport do kalendarzy zewnętrznych, wydarzenia z datą zakończenia, edycja pojedynczych wystąpień serii.
+- Wgrywanie plików poza wpisami.
 
 ## Uwagi
 
 ### Do potwierdzenia przed danym etapem
 
-- Kalendarz (historyjki 54–59): uprawnienia jak przy wpisach, publiczne wydarzenia tylko od zarządzających, brak powtarzalności. Alternatywa: wydarzenia tworzą wyłącznie zarządzający.
-- Zakończenie zbiórki (73) i przypisanie strony aktualności przez operatora (77).
-- Eksport archiwum obejmuje rozliczenia składek (85); w discovery mowa była o wpisach, komentarzach i plikach.
+- Zakończenie zbiórki (77) i przypisanie strony aktualności przez operatora (81).
+- Eksport archiwum obejmuje rozliczenia składek (89); w discovery mowa była o wpisach, komentarzach i plikach.
 
 ### Otwarte kwestie z discovery (bez zmian)
 

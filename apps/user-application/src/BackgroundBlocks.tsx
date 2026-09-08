@@ -6,6 +6,11 @@ const blocks = [
   { kind: 'grass', x: '3%', y: 2470, size: 58, angle: 8 },
   { kind: 'gold', x: '94%', y: 2810, size: 49, angle: -7 },
   { kind: 'diamond', x: '2%', y: 3180, size: 38, angle: 12 },
+  { kind: 'grass', x: '48%', y: 745, size: 47, angle: -9 },
+  { kind: 'gold', x: '60%', y: 1155, size: 44, angle: 8 },
+  { kind: 'diamond', x: '43%', y: 2280, size: 48, angle: -12 },
+  { kind: 'wood', x: '54%', y: 2740, size: 42, angle: 7 },
+  { kind: 'grass', x: '38%', y: 2930, size: 38, angle: -6 },
 ] as const;
 const colors = {
   grass: ['#83ad52', '#806240', '#60482f'],
@@ -18,7 +23,7 @@ const colors = {
 export default function BackgroundBlocks() {
   return <div className="background-blocks" aria-hidden="true">{blocks.map((block, i) => {
     const [top, left, right] = colors[block.kind];
-    return <svg key={i} className={`ambient-block ambient-${block.kind}`} viewBox="0 0 64 72" style={{ left: block.x, top: block.y, width: block.size, transform: `rotate(${block.angle}deg)` }}>
+    return <svg key={i} className={`ambient-block ambient-${block.kind}${i >= 7 ? ' ambient-center' : ''}`} viewBox="0 0 64 72" style={{ left: block.x, top: block.y, width: block.size, transform: `rotate(${block.angle}deg)` }}>
       <path d="M32 2 62 17 32 32 2 17Z" fill={top}/>
       <path d="M2 17 32 32v36L2 53Z" fill={left}/>
       <path d="M32 32 62 17v36L32 68Z" fill={right}/>

@@ -2,6 +2,8 @@
 .background-blocks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
 .ambient-block { position: absolute; opacity: .52; filter: drop-shadow(4px 8px 0 #07180c30); }
 :root[data-theme='light'] .ambient-block { opacity: .42; }
+.ambient-block.ambient-center { opacity: .23; }
+:root[data-theme='light'] .ambient-block.ambient-center { opacity: .2; }
 .polish-flag { filter: none; }
 /* Move the small status cards off the enlarged school facade. */
 .float-message { top: 42px; left: -8px; }

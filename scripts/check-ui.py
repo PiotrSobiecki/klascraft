@@ -12,6 +12,13 @@ with sync_playwright() as p:
     page.wait_for_load_state('networkidle')
     expect(page.get_by_text('Mała wyprawa, wielka przygoda!', exact=True)).to_be_visible()
     page.screenshot(path=str(out / 'desktop.png'), full_page=True)
+    page.get_by_role('button', name='Włącz jasny motyw').click()
+    expect(page.locator('html')).to_have_attribute('data-theme', 'light')
+    assert page.evaluate('getComputedStyle(document.documentElement).colorScheme') == 'light'
+    page.reload()
+    page.wait_for_load_state('networkidle')
+    expect(page.get_by_role('button', name='Włącz ciemny motyw')).to_be_visible()
+    page.screenshot(path=str(out / 'desktop-light.png'), full_page=True)
     panel = page.get_by_role('navigation', name='Panel klasy')
     panel.get_by_role('button', name='Rozmowy rodziców').click()
     page.get_by_role('textbox', name='Wiadomość do rodziców').fill('Sprawdzona wiadomość demo')
@@ -48,7 +55,7 @@ with sync_playwright() as p:
     expect(page.get_by_role('button', name='Przeczytane', exact=True)).to_have_attribute('aria-pressed', 'true')
     assert page.request.get('http://localhost:5173/api/health').json()['status'] == 'ok'
     assert page.request.get('http://localhost:5173/api/missing').status == 404
-    for width in [390, 768, 1280]:
+    for width in [320, 390, 768, 1280]:
         page.set_viewport_size({"width": width, "height": 900})
         page.evaluate('window.scrollTo(0,0)')
         page.wait_for_timeout(300)
@@ -58,8 +65,24 @@ with sync_playwright() as p:
             expect(page.get_by_role('navigation', name='Nawigacja główna')).to_be_visible()
             page.get_by_role('button', name='Zamknij menu', exact=True).click()
             page.screenshot(path=str(out / 'mobile.png'), full_page=True)
+    page.get_by_role('button', name='Włącz ciemny motyw').click()
+    page.reload()
+    page.wait_for_load_state('networkidle')
+    expect(page.locator('html')).to_have_attribute('data-theme', 'dark')
+    page.get_by_role('button', name='Włącz jasny motyw').focus()
+    page.keyboard.press('Enter')
+    expect(page.locator('html')).to_have_attribute('data-theme', 'light')
+    # Storage restrictions should not prevent rendering or switching the palette.
+    restricted = browser.new_context()
+    restricted.add_init_script("Object.defineProperty(window, 'localStorage', {get() {throw new Error('Storage unavailable')}})")
+    restricted_page = restricted.new_page()
+    restricted_page.on('pageerror', lambda error: errors.append(str(error)))
+    restricted_page.goto('http://localhost:5173')
+    restricted_page.get_by_role('button', name='Włącz jasny motyw').click()
+    expect(restricted_page.locator('html')).to_have_attribute('data-theme', 'light')
+    restricted.close()
     page.emulate_media(reduced_motion='reduce')
     assert page.locator('.floating-card').first.evaluate('(el) => getComputedStyle(el).animationName') == 'none'
     assert not errors, errors
     browser.close()
-    print('PASS: desktop/mobile, parent/student, messages, attachments, downloads, calendar, class dialog, read state, API, reduced motion; no browser errors.')
+    print('PASS: desktop/mobile, light/dark persistence and keyboard, blocked storage, parent/student, messages, attachments, downloads, calendar, class dialog, read state, API, reduced motion; no browser errors.')

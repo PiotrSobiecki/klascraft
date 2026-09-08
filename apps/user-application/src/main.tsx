@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { initializeTheme } from './ThemeToggle';
 import './styles.css';
 import './pixel-theme.css';
+import './pixel-light.css';
+initializeTheme();
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);

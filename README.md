@@ -5,7 +5,9 @@ Polski landing page dla platformy komunikacji klasowej, z autorską ilustracją 
 ## Warianty wyglądu
 
 - `main` — oryginalna jasna wersja, aktualnie dostępna na Cloudflare.
-- `design/pixel-dark` — lokalna propozycja: ciemna leśna paleta, Pixelify Sans w nagłówkach, klockowe ramki i przyciski, dodatkowe fragmenty wyspy i wieczorna ilustracja. Warstwa stylów wariantu jest w `apps/user-application/src/pixel-theme.css`.
+- `design/pixel-dark` — lokalna propozycja z jasnym i ciemnym motywem, Pixelify Sans w nagłówkach, klockowymi ramkami i przyciskami oraz dodatkowymi fragmentami wyspy. Warstwy stylów są w `apps/user-application/src/pixel-theme.css` i `pixel-light.css`.
+
+Przełącznik słońca/księżyca w nagłówku zmienia motyw całej strony, panelu i okien dialogowych. Domyślny motyw jest ciemny; wybór jest zapamiętywany w `localStorage` pod kluczem `klascraft-theme`. Przy zablokowanym dostępie do pamięci przeglądarki przełącznik nadal działa w bieżącej karcie.
 
 Przełączanie przy czystym drzewie roboczym:
 

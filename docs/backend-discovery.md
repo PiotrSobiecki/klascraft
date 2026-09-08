@@ -177,12 +177,11 @@ Nie są to zatwierdzone założenia; nie przedstawiać propozycji technicznych j
 
 ## Następny krok
 
-### Uzupełnienia z rozpoczętego blueprint
+### Uzupełnienia z blueprint (Q151–Q168)
 
-- Użytkownik włączył do PRD kalendarz i składki obecne w demo (Q151, odpowiedź 2). Ich szczegółowe wymagania nie zostały jeszcze ustalone.
-- Otwarte Q152: czy składki oznaczają wyłącznie ewidencję wpłat dokonywanych poza aplikacją, czy również przyjmowanie płatności przez operatora. Bezpłatność samej aplikacji pozostaje zatwierdzona i nie rozstrzyga tej kwestii.
-- Docelowe repozytorium wskazane przez użytkownika: https://github.com/PiotrSobiecki/klascraft. Użytkownik upoważnił do publikacji obecnego brancha i dokumentacji na `main` oraz PRD i issues w tym repozytorium.
-- PRD jest w przygotowaniu; niniejszy dokument pozostaje zapisem discovery, nie ukończonym PRD. Podział na moduły i kryteria walidacji wymagają sprawdzenia z użytkownikiem zgodnie z workflow blueprint.
+- Kalendarz i składki wchodzą do PRD (Q151). Składki to wyłącznie ewidencja wpłat dokonywanych poza aplikacją (Q152); szczegóły w PRD.
+- Docelowe repozytorium: https://github.com/PiotrSobiecki/klascraft. Użytkownik upoważnił do publikacji brancha, dokumentacji, PRD i issues.
+- PRD: `docs/prd.md`. Wymagania kalendarza nie były przedmiotem wywiadu i są w PRD oznaczone jako założenia do potwierdzenia.
 
 Przygotować PRD na podstawie tych ustaleń, skonfrontować je z istniejącym frontendem i rozstrzygnąć otwarte kwestie przez inspekcję projektu, badanie integracji lub pojedyncze pytania tam, gdzie potrzebna jest decyzja produktowa. Potem przygotować pionowe etapy implementacji całego zakresu i kryteria odbioru, szczególnie dostępu do klas, publicznych plików, zaproszeń i zmian ról.
 
